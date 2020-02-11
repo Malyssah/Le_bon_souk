@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AnnonceController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h2>Liste de vos annonces</h2>
+
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th class="text-center align-middle">Titre de l'annonce</th>
+            <th class="text-center align-middle col-2">Contenu de l'annonce</th>
+            <th class="text-center align-middle">Date de création</th>
+            <th class="text-center align-middle">Date de validité</th>
+            <th class="text-center align-middle">Image</th>
+            <th class="text-center align-middle">Afficher</th>
+            <th class="text-center align-middle">Editer</th>
+            <th class="text-center align-middle">Effacer</th>
+        </tr>
+    </thead>   
+    <tbody>
+    {% for key, value in annonce %}
+        <tr>
+            {% set ok = "no" %}
+            <td class="align-middle text-center">{{value.Nom}}</td>
+            <td class="align-middle">{{value.Contenu}}</td>
+            <td class="align-middle text-center">{{value.DateCreation|date("d/m/y")}}</td>
+            <td class="align-middle text-center">{{value.DateValidite|date("d/m/y")}}</td>
+            {% if show is defined %}
+                {% for value2 in image %}
+                {% if value2.annid == value.id %}
+                    <td><img src='{{ asset(""~value2.name) }}' width="150" height="100"></td>
+                    {% set ok = "yes" %}
+                    {% endif %}
+                {% endfor %}
+                {% if ok == "no" %}
+                    <td class="align-middle text-center">Pas d'image</td>
+                {% endif %}
+                {% else %}
+                <td class="align-middle text-center">Pas d'image</td>
+            {% endif %}
+            <td class="align-middle text-center">
+                <form action="/annonce/show/{{value.id}}" method="post">
+                <input type="text" name="id" value={{value.id}} hidden>
+                <button type="submit" name="save" class="btn btn-info btn-sm">Afficher</button></form>
+            </td>
+            {% if app.user.id == value.userid %}
+            <td class="align-middle text-center">
+                <form action="/annonce/edit/{{value.id}}" method="post">
+                <input type="text" name="id" value={{value.id}} hidden>
+                <input type="text" name="iduser" value={{app.user.id}} hidden>
+                <button type="submit" name="save" class="btn btn-info btn-sm">Editer</button></form>
+            </td>
+            <td class="align-middle text-center">
+                <form action="/annonce/delete/{{value.id}}" method="post">
+                <input type="text" name="id" value={{value.id}} hidden>
+                <input type="text" name="iduser" value={{app.user.id}} hidden>
+                <button type="submit" name="save" class="btn btn-danger btn-sm">Effacer</button></form>
+            </td>
+            {% endif %}               
+        </tr>
+        {% endfor %}
+    </tbody>
+<table>
+
+
+
+{% endblock %}

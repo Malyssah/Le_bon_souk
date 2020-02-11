@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="container">Connexion au bon souk</h1>
+
+{% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<form action="{{ path('security_login') }}" method="post">
+    <div class="form-group">
+        <label for="mail">Adresse email</label>
+        <input type="text" placeholder="Adresse mail..." required name="_username" class="form-control" value="{{ last_username }}">
+    </div>
+    <div class="form-group">
+        <label for="mail">Mot de passe</label>
+        <input type="password" placeholder="Mot de passe..." required name="_password" class="form-control">
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Connexion</button>
+    </div>
+</form>
+
+{% endblock %}

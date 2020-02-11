@@ -1,0 +1,22 @@
+ {% extends 'base.html.twig' %}
+
+ {% form_theme formRubrique 'bootstrap_4_layout.html.twig' %}
+
+
+ {% block body %}
+    {% if editMode %}
+        <h1>Modifier une rubrique</h1>
+    {% else %}
+        <h1>Créer une nouvelle rubrique</h1>
+    {% endif %}
+        {{ form_start(formRubrique) }}
+            {{ form_row(formRubrique.libelle, {'attr': {'placeholder': "Libellé de la rubrique"}}) }}
+                <button type="submit" class="btn btn-success">
+                    {% if editMode %}
+                    Modifier la rubrique
+                    {% else %}
+                    Ajouter la rubrique
+                    {% endif %}
+                </button>
+        {{ form_end(formRubrique) }}
+ {% endblock %}

@@ -1,0 +1,25 @@
+   {% extends 'base.html.twig' %}
+
+{% block title %}Hello RubriquesController!{% endblock %}
+
+
+
+{% block body %}
+    <section class="rubriques">
+        <h2>Rubriques</h2>
+        <div class="content">
+
+            {% for rubrique in rubriques %}
+
+            {{ rubrique.libelle }}<br>
+            
+            <form action="/annonce/{{rubrique.id}}/liste" method="post">
+            <input type="text" name="id" value="{{rubrique.id}}" hidden>
+            <button type="submit" name="save" class="btn btn-info btn-sm">Liste annonce</button>
+            </form>
+            
+            {% endfor %}
+
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une annonce{% endblock %}
+{% block javascripts %}
+<script>
+$( document ).ready(function() {
+    $(function() {
+     $("#annonce_Image").change(function (e){
+       var fileName = e.target.files[0].name;
+       $(".custom-file-label").html(fileName);
+     });
+  });
+});
+</script>
+{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h2>Editer une annonce</h2>
+
+{{ form_start(formAnnonce) }}
+
+{{form_row(formAnnonce.Nom, {'attr': {placeholder: "nom de l'Annonce"}})}}
+
+{{form_row(formAnnonce.Contenu, {'attr': {placeholder: "description de l'Annonce"}})}}
+
+
+
+{{form_row(formAnnonce.Date_Validite, {'attr': {placeholder: "Date de validité de l'Annonce"}})}}
+{{form_row(formAnnonce.rub_id, {'attr': {placeholder: "nom de l'Annonce",hidden:"hidden", value:"-1"}})}}
+{{form_row(formAnnonce.user_id, {'attr': {placeholder: "nom de l'Annonce",hidden:"hidden", value:""~app.user.id}})}}
+Rubrique: <br>
+<div class="form group">
+<select name="rubrique" class="form-control">
+{% for rub in rubrique %}
+<option value="{{rub.id}}">{{rub.libelle}}</option>
+{% endfor %}
+</select><br></div>
+{{ form_row(formAnnonce.Image,{'attr': {placeholder: "Choisissez une image (optionnel)"}}) }}
+{{ form_widget(formAnnonce) }}
+<button type="submit" class="btn btn-success">Enregistrer</button>
+{{ form_end(formAnnonce) }}
+{% endblock %}
