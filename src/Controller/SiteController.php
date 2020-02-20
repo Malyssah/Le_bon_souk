@@ -123,7 +123,7 @@ class SiteController extends AbstractController
                 $originalFilename
             );
         
-            rename('C:/wamp64/www/test symfony/Le_bon_souk-Nicolas/public/uploads/'.$id."/".$originalFilename, 'C:/wamp64/www/test symfony/Le_bon_souk-Nicolas/public/uploads/'.$id."/".$originalFilename.".".$ext);
+            rename('C:\wamp64\www\test symfony\Le_bon_souk\public\uploads/'.$id."/".$originalFilename, 'C:\wamp64\www\test symfony\Le_bon_souk\public\uploads/'.$id."/".$originalFilename.".".$ext);
             $newfilename=$originalFilename.".".$ext;
             $href="uploads/".$id."/".$newfilename;
             $image->setname($href);

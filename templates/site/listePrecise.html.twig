@@ -24,14 +24,15 @@
             <th class="text-center align-middle">Effacer</th>
         </tr>
     </thead>   
+
     <tbody>
     {% for key, value in annonce %}
         <tr>
             {% set ok = "no" %}
-            <td class="align-middle text-center">{{value.Nom}}</td>
-            <td class="align-middle">{{value.Contenu}}</td>
-            <td class="align-middle text-center">{{value.DateCreation|date("d/m/y")}}</td>
-            <td class="align-middle text-center">{{value.DateValidite|date("d/m/y")}}</td>
+                <td class="align-middle text-center">{{value.Nom}}</td>
+                <td class="align-middle">{{value.Contenu}}</td>
+                <td class="align-middle text-center">{{value.DateCreation|date("d/m/y")}}</td>
+                <td class="align-middle text-center">{{value.DateValidite|date("d/m/y")}}</td>
             {% if show is defined %}
                 {% for value2 in image %}
                 {% if value2.annid == value.id %}
@@ -43,6 +44,7 @@
                     <td class="align-middle text-center">Pas d'image</td>
                 {% endif %}
             {% endif %}
+
             {% if app.user.id == value.userid %}
             <td class="align-middle text-center">
                 <form action="/annonce/edit/{{value.id}}" method="post">
