@@ -55,7 +55,7 @@ easy_admin:
           title: 'Annonces'
           actions: ['-new']
           fields:
-            - { property: 'id', label: 'ID Utilisateur' }
+            - { property: 'id', label: 'ID Annonce' }
             - { property: 'rubid', label: 'ID Rubrique' }
             - { property: 'userid', label: 'ID Utilisateur' }
             - { property: 'Nom', label: 'Nom' }
