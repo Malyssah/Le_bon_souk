@@ -29,7 +29,7 @@ class Annonce
     /**
      * @ORM\Column(type="text")
      * @Assert\Length(
-     * min=50,
+     * min=20,
      * minMessage="Le contenu doit être de {{ limit }} charactère minimum")
      */
     private $Contenu;
