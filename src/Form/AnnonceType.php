@@ -20,7 +20,6 @@ class AnnonceType extends AbstractType
         $builder
             ->add('Nom')
             ->add('Contenu')
-
             ->add('Date_Validite', DateType::class)
             ->add('rub_id',IntegerType::class, array('label'=>false))
             ->add('user_id',IntegerType::class,array('label'=>false))
