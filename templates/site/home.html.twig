@@ -27,7 +27,15 @@ Le bon souk - Accueil
 				<td>{{value.Contenu}}</td>
 				<td>{{value.DateCreation|date("d/m/y")}}</td>
 				<td>{{value.DateValidite|date("d/m/y")}}</td>
-			</tr>
+			
+                {# <td class="align-middle text-center">
+                    <form action="/annonce/show/{{value.id}}" method="post">
+                        <input type="text" name="id" value={{value.id}} hidden>
+                        <button type="submit" name="save" class="btn btn-info btn-sm">Afficher</button>
+                    </form>
+                </td> #}
+            </tr>
+
 			{% endfor %}
 
     </table>
