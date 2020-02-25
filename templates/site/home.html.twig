@@ -1,37 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Le bon souk - Accueil
+	Le bon souk - Accueil
 {% endblock %}
 
 {% block body %}
 
-<h1 class="text-center">Liste des rubriques</h1>
+	<h1 class="text-center">Liste des annonces</h1>
 
-<section class="container">
-    {{ form(form) }}
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Titre de l'annonce</th>
-                <th>Contenu de l'annonce</th>
-                <th>Date de création</th>
-                <th>Date de validité</th>
-            </tr>
-        </thead>
-        <tbody>
-			{% for key, value in ann %}
-			<tr>
-				<td>{{value.Nom}}</td>
-				<td>{{value.Contenu}}</td>
-				<td>{{value.DateCreation|date("d/m/y")}}</td>
-				<td>{{value.DateValidite|date("d/m/y")}}</td>
-			</tr>
-			{% endfor %}
+	<section class="container">
+		{{ form(form) }}
 
-    </table>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Titre de l'annonce</th>
+						<th>Contenu de l'annonce</th>
+						<th>Date de création</th>
+						<th>Date de validité</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for key, value in ann %}
+						<tr>
+							<td>
+								<a href="annonce/show?id={{value.id}}">{{value.Nom}}</a>
+							</td>
+							<td>{{value.Contenu}}</td>
+							<td>{{value.DateCreation|date("d/m/y")}}</td>
+							<td>{{value.DateValidite|date("d/m/y")}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-</section>
+		</section>
 
-{% endblock %}
+	{% endblock %}
