@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AnnonceController!{% endblock %}
+{% block title %}Détail de l'annonce{% endblock %}
 
 {% block body %}
 <style>
@@ -8,7 +8,7 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<h2>Liste de vos annonces</h2>
+<h2 class="text-center">Annonce(s)</h2>
 
 
 
@@ -20,19 +20,22 @@
             <th class="text-center align-middle">Date de création</th>
             <th class="text-center align-middle">Date de validité</th>
             <th class="text-center align-middle">Image</th>
-            <th class="text-center align-middle">Editer</th>
+            {% if app.user.id is defined %}
+            
+            <th class="text-center align-middle">Éditer</th>
             <th class="text-center align-middle">Effacer</th>
+                  
+            {% endif %}  
         </tr>
     </thead>   
-
     <tbody>
     {% for key, value in annonce %}
         <tr>
             {% set ok = "no" %}
-                <td class="align-middle text-center">{{value.Nom}}</td>
-                <td class="align-middle">{{value.Contenu}}</td>
-                <td class="align-middle text-center">{{value.DateCreation|date("d/m/y")}}</td>
-                <td class="align-middle text-center">{{value.DateValidite|date("d/m/y")}}</td>
+            <td class="align-middle text-center">{{value.Nom}}</td>
+            <td class="align-middle">{{value.Contenu}}</td>
+            <td class="align-middle text-center">{{value.DateCreation|date("d/m/y")}}</td>
+            <td class="align-middle text-center">{{value.DateValidite|date("d/m/y")}}</td>
             {% if show is defined %}
                 {% for value2 in image %}
                 {% if value2.annid == value.id %}
@@ -44,13 +47,14 @@
                     <td class="align-middle text-center">Pas d'image</td>
                 {% endif %}
             {% endif %}
-
+            {% if app.user.id is defined %}
             {% if app.user.id == value.userid %}
+            
             <td class="align-middle text-center">
                 <form action="/annonce/edit/{{value.id}}" method="post">
                 <input type="text" name="id" value={{value.id}} hidden>
                 <input type="text" name="iduser" value={{app.user.id}} hidden>
-                <button type="submit" name="save" class="btn btn-info btn-sm">Editer</button></form>
+                <button type="submit" name="save" class="btn btn-info btn-sm">Éditer</button></form>
             </td>
             <td class="align-middle text-center">
                 <form action="/annonce/delete/{{value.id}}" method="post">
@@ -58,7 +62,8 @@
                 <input type="text" name="iduser" value={{app.user.id}} hidden>
                 <button type="submit" name="save" class="btn btn-danger btn-sm">Effacer</button></form>
             </td>
-            {% endif %}               
+            {% endif %}         
+            {% endif %}       
         </tr>
         {% endfor %}
     </tbody>
